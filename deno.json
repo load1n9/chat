@@ -1,0 +1,10 @@
+{
+    "name": "@loading/chat",
+    "version": "0.1.4",
+    "description": "llm chat",
+    "license": "MIT",
+    "exports": {
+        ".": "./chat.ts",
+        "./server": "./server.ts"
+    }
+}
