@@ -239,14 +239,14 @@ if (import.meta.main) {
     console.log(gray("\n\n════════════════"));
     const message = prompt("Enter a message ▪ ");
 
-    if (!message) {
+    if (!message || message.length < 1) {
       continue;
     }
 
     if (message.startsWith("/")) {
       await parseCommand(message);
+      continue;
     }
-
     messages.push({ role: "user", content: message });
     const response = await sendMessage(message);
     console.log("\n" + response);
