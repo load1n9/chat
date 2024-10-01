@@ -1,6 +1,6 @@
 # [Chat](https://jsr.io/@loading/chat)
 
-:)
+![chat](./assets/chat.svg)
 
 ## Simply run the following command and thats it
 

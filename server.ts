@@ -22,7 +22,7 @@ const generator = await pipeline(
   "text-generation",
   model || "onnx-community/Llama-3.2-1B-Instruct",
 );
-async function handler(req: Request): Promise<Response> {
+export async function handler(req: Request): Promise<Response> {
   const url = new URL(req.url);
   if (req.method === "POST" && url.pathname === "/v1/completions") {
     try {

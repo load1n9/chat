@@ -1,7 +1,7 @@
 {
   "name": "@loading/chat",
-  "version": "0.1.4",
-  "description": "llm chat",
+  "version": "0.1.5",
+  "description": "local llm chat",
   "license": "MIT",
   "exports": {
     ".": "./chat.ts",
