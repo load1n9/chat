@@ -5,7 +5,7 @@
 ## Simply run the following command and thats it
 
 ```sh
-deno run -A jsr:@loading/chat 
+deno run -A jsr:@loading/chat
 ```
 
 ## create a `chat-config.toml` file in the active directory to configure the chat
@@ -31,4 +31,5 @@ curl -X POST http://localhost:8000/v1/completions \  -H "Content-Type: applicati
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
