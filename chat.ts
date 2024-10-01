@@ -44,6 +44,10 @@ async function sendMessage(message: string) {
   messages.push({ role: "user", content: message });
   const output = await generator(messages, {
     max_new_tokens: config ? config.max_new_tokens || 128 : 128,
+    temperature: config ? config.temperature || 1.0 : 1.0,
+    max_length: config ? config.max_length || 20 : 20,
+    top_p: config ? config.top_p || 1.0 : 1.0,
+    repetition_penalty: config ? config.repetition_penalty || 1.0 : 1.0,
   });
   messages.push({
     role: "system",
@@ -64,7 +68,7 @@ console.log(
 
 while (true) {
   console.log(gray("\n\n════════════════"));
-  const message = prompt(gray("Enter a message ▪ "));
+  const message = prompt("Enter a message ▪ ");
 
   if (message === null || message === "exit") {
     break;

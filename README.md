@@ -13,8 +13,15 @@ deno run -A jsr:@loading/chat
 ```toml
 [config]
 model = "onnx-community/Llama-3.2-1B-Instruct"
-system = ["You are a helpful assistant."]
+system = [
+  "You are an expert in computer science and programming.",
+  "Provide detailed explanations and code examples when necessary."
+]
 max_new_tokens = 128
+max_length = 20
+temperature = 1.0
+top_p = 1.0
+repetition_penalty = 1.2
 ```
 
 ## Run the server to kinda match a similar api to the openai chat api

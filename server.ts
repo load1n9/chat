@@ -107,9 +107,8 @@ async function handler(req: Request): Promise<Response> {
         },
       );
     }
-  } else {
-    return new Response("Not Found", { status: 404 });
   }
+  return new Response("Not Found", { status: 404 });
 }
 export default {
   fetch: handler,
