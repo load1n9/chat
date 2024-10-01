@@ -7,10 +7,28 @@ import { pipeline } from "npm:@huggingface/transformers@3.0.0-alpha.19";
 import { cyan, gray, yellow } from "jsr:@std/fmt@1.0.2/colors";
 import { parse } from "jsr:@std/toml@1.0.1";
 import { exists } from "jsr:@std/fs@1.0.4";
+import { parseArgs } from "jsr:@std/cli@1.0.6/parse-args";
+
+const args = parseArgs(Deno.args, {
+  boolean: ["help"],
+  alias: { help: ["h"] },
+});
+
+if (args.help) {
+  console.log(
+    gray(
+      `A simple chatbot that uses the Hugging Face transformers pipeline.
+   --help,-h      Show this help message.
+   `,
+    ),
+  );
+  Deno.exit(0);
+}
 
 let systemStuff: string[] | undefined = undefined;
 let model: string | undefined = undefined;
 let config: any;
+
 if (await exists("./chat-config.toml")) {
   console.log(gray("Loading configuration from chat-config.toml...\n"));
   config = parse(await Deno.readTextFile("chat-config.toml"))
@@ -28,14 +46,44 @@ const generator = await pipeline(
   model || "onnx-community/Llama-3.2-1B-Instruct",
 );
 
+async function cwdToFile() {
+  const dir = Deno.cwd();
+  let output =
+    "Here is the structure of the users current directory with the read README.md file:\n";
+  for await (const dirEntry of Deno.readDir(dir)) {
+    if (dirEntry.isDirectory) {
+      output += `Directory: ${dirEntry.name}\n`;
+    } else if (dirEntry.isFile) {
+      output += `File: ${dirEntry.name}\n`;
+      if (dirEntry.name === "README.md") {
+        output += await Deno.readTextFile(dir + "/README.md");
+      }
+    } else if (dirEntry.isSymlink) {
+      output += `Symlink: ${dirEntry.name}\n`;
+    }
+  }
+  return output;
+}
+
 const messages = [
   {
     role: "system",
     content: systemStuff
       ? systemStuff.join("\n")
-      : "You are a helpful assistant",
+      : "You are a helpful assistant with knowledge of many things.",
   },
 ];
+
+if (
+  config
+    ? config.allow_dir as boolean
+    : prompt("Allow access to directory?(y/N)") === "y"
+) {
+  messages.push({
+    role: "system",
+    content: await cwdToFile(),
+  });
+}
 
 /**
  * Send a message to the model
