@@ -17,8 +17,22 @@ const args = parseArgs(Deno.args, {
 if (args.help) {
   console.log(
     gray(
-      `A simple chatbot that uses the Hugging Face transformers pipeline.
-   --help,-h      Show this help message.
+      cyan(`
+                                            Cat Sounds
+                                      /\\_/\\  / 
+                                     ( o.o )
+                                      > ^ <
+                                     (_/^\\_)    
+
+                                     by Dean Srebnik
+                                     MIT License
+      `)+`
+                       Usage: deno run -A jsr:@loading/chat [options]
+              A simple chatbot that uses the Hugging Face transformers pipeline.
+
+
+                    Chat with the model using the default settings and model unless a chat-config.toml file is present.
+   --help,-h        Show this help message.
    `,
     ),
   );
