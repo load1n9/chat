@@ -1,3 +1,7 @@
+/**
+ * @module server.ts
+ * @description A simple chatbot server that uses the Hugging Face transformers pipeline.
+ */
 // deno-lint-ignore-file no-explicit-any
 import { pipeline } from "npm:@huggingface/transformers@3.0.0-alpha.19";
 import { parse } from "jsr:@std/toml@1.0.1";
@@ -22,7 +26,11 @@ const generator = await pipeline(
   "text-generation",
   model || "onnx-community/Llama-3.2-1B-Instruct",
 );
-export async function handler(req: Request): Promise<Response> {
+
+/**
+ * Handle incoming requests
+ */
+async function handler(req: Request): Promise<Response> {
   const url = new URL(req.url);
   if (req.method === "POST" && url.pathname === "/v1/completions") {
     try {

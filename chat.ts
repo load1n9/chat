@@ -1,3 +1,7 @@
+/**
+ * @module chat.ts
+ * @description A simple chatbot that uses the Hugging Face transformers pipeline.
+ */
 // deno-lint-ignore-file no-explicit-any
 import { pipeline } from "npm:@huggingface/transformers@3.0.0-alpha.19";
 import { cyan, gray, yellow } from "jsr:@std/fmt@1.0.2/colors";
@@ -33,6 +37,9 @@ const messages = [
   },
 ];
 
+/**
+ * Send a message to the model
+ */
 async function sendMessage(message: string) {
   messages.push({ role: "user", content: message });
   const output = await generator(messages, {
@@ -57,7 +64,7 @@ console.log(
 
 while (true) {
   console.log(gray("\n\n════════════════"));
-  const message = prompt("Enter a message ▪ ");
+  const message = prompt(gray("Enter a message ▪ "));
 
   if (message === null || message === "exit") {
     break;
