@@ -4,13 +4,25 @@
  */
 // deno-lint-ignore-file no-explicit-any
 import { pipeline } from "npm:@huggingface/transformers@3.0.0-alpha.19";
-import { cyan, gray, yellow } from "jsr:@std/fmt@1.0.2/colors";
+import {
+  bold,
+  brightMagenta,
+  brightRed,
+  cyan,
+  gray,
+  white,
+  yellow,
+} from "jsr:@std/fmt@1.0.2/colors";
 import { parse } from "jsr:@std/toml@1.0.1";
 import { exists } from "jsr:@std/fs@1.0.4";
 import { parseArgs } from "jsr:@std/cli@1.0.6/parse-args";
 
+/**
+ * Parse the command line arguments
+ */
 const args = parseArgs(Deno.args, {
   boolean: ["help"],
+  string: ["model"],
   alias: { help: ["h"] },
 });
 
@@ -47,20 +59,66 @@ if (await exists("./chat-config.toml")) {
   console.log(gray("Loading configuration from chat-config.toml...\n"));
   config = parse(await Deno.readTextFile("chat-config.toml"))
     .config as any;
-  if (config.model) {
-    model = config.model;
-  }
-  if (config.system) {
-    systemStuff = config.system;
-  }
+  model = config.model;
+  systemStuff = config.system;
 }
 
+if (args.model) {
+  model = args.model;
+}
+
+/**
+ * The model
+ */
 const generator = await pipeline(
   "text-generation",
   model || "onnx-community/Llama-3.2-1B-Instruct",
+  {
+    progress_callback: (
+      data: {
+        status: "done" | "ready" | "download" | "progress" | "initiate";
+        name: string;
+        file: string;
+        progress?: number;
+        loaded?: number;
+        total?: number;
+      },
+    ) => {
+      if (data.status === "download") {
+        console.log(
+          gray(
+            `Downloading ${bold(white(data.name))} from ${
+              bold(white(data.file))
+            }...`,
+          ),
+        );
+      }
+      if (data.status === "progress") {
+        console.log(
+          gray(
+            `Downloading ${bold(white(data.name))} from ${
+              bold(white(data.file))
+            }: ${data.progress}%`,
+          ),
+        );
+      }
+      if (data.status === "done") {
+        console.log(
+          brightMagenta(
+            `Downloaded ${bold(white(data.name))} from ${
+              bold(white(data.file))
+            }.`,
+          ),
+        );
+      }
+    },
+  },
 );
 
-async function cwdToFile() {
+/**
+ * Get the current working directory and its contents
+ */
+async function cwdToFile(): Promise<string> {
   const dir = Deno.cwd();
   let output = "Here is the structure of the user's current directory:\n";
   async function readDirRecursive(
@@ -88,7 +146,13 @@ async function cwdToFile() {
   return output;
 }
 
-const messages = [
+/**
+ * The chat messages
+ */
+export const messages: {
+  role: string;
+  content: string;
+}[] = [
   {
     role: "system",
     content: systemStuff
@@ -101,6 +165,9 @@ const messages = [
   },
 ];
 
+/**
+ * Parse a command
+ */
 export async function parseCommand(command: string) {
   if (command === "/help") {
     console.log(
@@ -157,8 +224,6 @@ export async function sendMessage(message: string): Promise<any> {
 }
 
 if (import.meta.main) {
-  console.log(gray("Type a message to chat with the model."));
-  console.log(yellow("Type '/exit' or ctrl+c to quit."));
   console.log(
     gray(
       `Model: ${
@@ -166,6 +231,9 @@ if (import.meta.main) {
       }`,
     ),
   );
+  console.log(gray("Type a message to chat with the model."));
+  console.log(brightRed("'/exit' or ctrl+c to quit."));
+  console.log(yellow("'/help for a list of commands.'"));
 
   while (true) {
     console.log(gray("\n\n════════════════"));

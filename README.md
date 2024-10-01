@@ -12,7 +12,6 @@ deno run -A jsr:@loading/chat
 
 ```toml
 [config]
-allow_dir = true # allow the use of directories for context
 model = "onnx-community/Llama-3.2-1B-Instruct" # the model to use
 system = [
   "You are an expert in computer science and programming.",

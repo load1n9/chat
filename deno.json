@@ -1,6 +1,6 @@
 {
   "name": "@loading/chat",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "local llm chat",
   "license": "MIT",
   "exports": {
