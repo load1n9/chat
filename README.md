@@ -8,7 +8,7 @@
 deno run -A jsr:@loading/chat
 ```
 
-## create a `chat-config.toml` file in the active directory to configure the chat
+## [Optional] create a `chat-config.toml` file in the active directory to configure the chat
 
 ```toml
 [config]
