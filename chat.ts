@@ -140,7 +140,7 @@ export async function parseCommand(command: string) {
 /**
  * Send a message to the model
  */
-export async function sendMessage(message: string) {
+export async function sendMessage(message: string): Promise<any> {
   messages.push({ role: "user", content: message });
   const output = await generator(messages, {
     max_new_tokens: config ? config.max_new_tokens || 128 : 128,
