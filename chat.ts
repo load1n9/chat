@@ -132,7 +132,7 @@ async function cwdToFile(): Promise<string> {
         await readDirRecursive(`${path}/${dirEntry.name}`, indent + "  ");
       } else if (dirEntry.isFile) {
         output += `${indent}File: ${dirEntry.name}\n`;
-        if (dirEntry.name.endsWith(".md")) {
+        if (dirEntry.name === "README.md") {
           output += `${indent}Contents: ${await Deno.readTextFile(
             `${path}/${dirEntry.name}`,
           )}\n`;
@@ -145,6 +145,9 @@ async function cwdToFile(): Promise<string> {
 
   await readDirRecursive(dir);
   output += "\n";
+  if (output.length > 1000) {
+    output = output.slice(0, 1000) + "\n...output truncated...";
+  }
   return output;
 }
 
