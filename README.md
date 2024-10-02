@@ -11,7 +11,7 @@ deno run -A jsr:@loading/chat
 ## [Optional] create a `chat-config.toml` file in the active directory to configure the chat
 
 ```toml
-"$schema" = 'https://jsr.io/@loading/chat/0.1.14/config-schema.json'
+"$schema" = 'https://jsr.io/@loading/chat/0.1.16/config-schema.json'
 
 [config]
 model = "onnx-community/Llama-3.2-1B-Instruct"

@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@denosaurs/rutt@0.3.0": "0.3.0",
     "jsr:@std/cli@1.0.6": "1.0.6",
     "jsr:@std/collections@^1.0.5": "1.0.7",
     "jsr:@std/fmt@*": "1.0.2",
@@ -11,6 +12,9 @@
     "npm:@huggingface/transformers@3.0.0-alpha.19": "3.0.0-alpha.19"
   },
   "jsr": {
+    "@denosaurs/rutt@0.3.0": {
+      "integrity": "203b12b5e4d928d9070c1a2d88caddd25c1ead5d84c08034061d79622988d682"
+    },
     "@std/cli@1.0.6": {
       "integrity": "d22d8b38c66c666d7ad1f2a66c5b122da1704f985d3c47f01129f05abb6c5d3d"
     },
