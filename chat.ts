@@ -144,6 +144,7 @@ async function cwdToFile(): Promise<string> {
   }
 
   await readDirRecursive(dir);
+  output += "\n";
   return output;
 }
 
@@ -158,11 +159,20 @@ export const messages: {
     role: "system",
     content: systemStuff
       ? systemStuff.join("\n")
-      : "You are a helpful assistant with knowledge of many things.",
-  },
-  {
-    role: "system",
-    content: await cwdToFile(),
+      : "You are a helpful assistant with knowledge of many things." +
+        "Here is some information about the system:\n" +
+        `Platform: ${Deno.build.target}\n` +
+        `Architecture: ${Deno.build.arch}\n` +
+        `Operating System: ${Deno.build.os}\n` +
+        `Deno Version: ${Deno.version.deno}\n` +
+        `V8 Version: ${Deno.version.v8}\n` +
+        `TypeScript Version: ${Deno.version.typescript}\n` +
+        `current Deno instance PID: ${Deno.pid}\n` +
+        `Deno Memory Usage: ${Deno.memoryUsage().rss} bytes\n` +
+        `Free Space: ${Deno.systemMemoryInfo().free} bytes\n` +
+        `Total Space: ${Deno.systemMemoryInfo().total} bytes\n` +
+        `Available Space: ${Deno.systemMemoryInfo().available} bytes\n` +
+        await cwdToFile(),
   },
 ];
 

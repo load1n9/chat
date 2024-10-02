@@ -39,12 +39,7 @@
       },
       "required": [
         "model",
-        "system",
-        "max_new_tokens",
-        "max_length",
-        "temperature",
-        "top_p",
-        "repetition_penalty"
+        "system"
       ]
     }
   },
