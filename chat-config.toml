@@ -1,8 +1,9 @@
+"$schema" = 'https://raw.githubusercontent.com/load1n9/chat/refs/heads/main/config-schema.json'
+
 [config]
 model = "onnx-community/Llama-3.2-1B-Instruct" # Model to use
 system = [
-  "You are an expert in computer science and programming.",
-  "Provide detailed explanations and code examples when necessary."
+  "You are an assistant designed to help with any questions the user might have."
 ] # System prompts
 max_new_tokens = 128 # Maximum number of tokens to generate
 max_length = 20 # Maximum length of the response

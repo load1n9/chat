@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "config": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model to use"
+        },
+        "system": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "System prompts"
+        },
+        "max_new_tokens": {
+          "type": "integer",
+          "description": "Maximum number of tokens to generate"
+        },
+        "max_length": {
+          "type": "integer",
+          "description": "Maximum length of the response"
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Temperature for sampling"
+        },
+        "top_p": {
+          "type": "number",
+          "description": "Top-p for sampling"
+        },
+        "repetition_penalty": {
+          "type": "number",
+          "description": "Repetition penalty"
+        }
+      },
+      "required": [
+        "model",
+        "system",
+        "max_new_tokens",
+        "max_length",
+        "temperature",
+        "top_p",
+        "repetition_penalty"
+      ]
+    }
+  },
+  "required": ["config"]
+}

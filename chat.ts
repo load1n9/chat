@@ -22,7 +22,7 @@ import { parseArgs } from "jsr:@std/cli@1.0.6/parse-args";
  */
 const args = parseArgs(Deno.args, {
   boolean: ["help"],
-  string: ["model"],
+  string: ["model", "device"],
   alias: { help: ["h"] },
 });
 
@@ -74,6 +74,7 @@ const generator = await pipeline(
   "text-generation",
   model || "onnx-community/Llama-3.2-1B-Instruct",
   {
+    device: args.device as any,
     progress_callback: (
       data: {
         status: "done" | "ready" | "download" | "progress" | "initiate";
