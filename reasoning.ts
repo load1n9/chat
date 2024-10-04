@@ -1,6 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
 import { pipeline } from "npm:@huggingface/transformers@3.0.0-alpha.19";
-import { delay } from "jsr:@std/async";
+import { delay } from "jsr:@std/async@1.0.5";
 import { parseArgs } from "jsr:@std/cli@1.0.6/parse-args";
 import { help, modelCallback } from "./utils.ts";
 import { gray } from "jsr:@std/fmt@1.0.2/colors";
