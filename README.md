@@ -37,6 +37,17 @@ deno serve -A jsr:@loading/chat/server
 curl -X POST http://localhost:8000/v1/completions \  -H "Content-Type: application/json" \  -d '{    "prompt": "Once upon a time",    "max_tokens": 50,    "temperature": 0.7  }'
 ```
 
+## (New) Code Companion
+
+With the new code companion you can generate new projects and edit them and
+stuff
+
+```sh
+deno run -A jsr@loading/chat/companion
+```
+
+type /help to get a list of commands
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file

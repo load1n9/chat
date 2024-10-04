@@ -8,7 +8,7 @@ import { brightRed, cyan, gray, yellow } from "jsr:@std/fmt@1.0.2/colors";
 import { parse } from "jsr:@std/toml@1.0.1";
 import { exists } from "jsr:@std/fs@1.0.4";
 import { parseArgs } from "jsr:@std/cli@1.0.6/parse-args";
-import { cwdToFile, help, modelCallback } from "./utils.ts";
+import { help, modelCallback } from "./utils.ts";
 
 /**
  * Parse the command line arguments
@@ -71,11 +71,7 @@ export const messages: {
         `V8 Version: ${Deno.version.v8}\n` +
         `TypeScript Version: ${Deno.version.typescript}\n` +
         `current Deno instance PID: ${Deno.pid}\n` +
-        `Deno Memory Usage: ${Deno.memoryUsage().rss} bytes\n` +
-        `Free Space: ${Deno.systemMemoryInfo().free} bytes\n` +
-        `Total Space: ${Deno.systemMemoryInfo().total} bytes\n` +
-        `Available Space: ${Deno.systemMemoryInfo().available} bytes\n` +
-        await cwdToFile(),
+        `Deno Memory Usage: ${Deno.memoryUsage().rss} bytes\n`,
   },
 ];
 

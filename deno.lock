@@ -7,6 +7,7 @@
     "jsr:@std/fmt@*": "1.0.2",
     "jsr:@std/fmt@1.0.2": "1.0.2",
     "jsr:@std/fs@1.0.4": "1.0.4",
+    "jsr:@std/path@1.0.6": "1.0.6",
     "jsr:@std/path@^1.0.6": "1.0.6",
     "jsr:@std/toml@1.0.1": "1.0.1",
     "npm:@huggingface/transformers@3.0.0-alpha.19": "3.0.0-alpha.19"
@@ -27,7 +28,7 @@
     "@std/fs@1.0.4": {
       "integrity": "2907d32d8d1d9e540588fd5fe0ec21ee638134bd51df327ad4e443aaef07123c",
       "dependencies": [
-        "jsr:@std/path"
+        "jsr:@std/path@^1.0.6"
       ]
     },
     "@std/path@1.0.6": {
