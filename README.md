@@ -43,7 +43,7 @@ With the new code companion you can generate new projects and edit them and
 stuff
 
 ```sh
-deno run -A jsr@loading/chat/companion
+deno run -A jsr:@loading/chat/companion
 ```
 
 type /help to get a list of commands
