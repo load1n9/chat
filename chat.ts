@@ -3,12 +3,15 @@
  * @description A simple chatbot that uses the Hugging Face transformers pipeline.
  */
 // deno-lint-ignore-file no-explicit-any
-import { pipeline } from "npm:@huggingface/transformers@3.0.0-alpha.19";
+import { pipeline, env } from "npm:@huggingface/transformers@3.0.0-alpha.19";
 import { brightRed, cyan, gray, yellow } from "jsr:@std/fmt@1.0.2/colors";
 import { parse } from "jsr:@std/toml@1.0.1";
 import { exists } from "jsr:@std/fs@1.0.4";
 import { parseArgs } from "jsr:@std/cli@1.0.6/parse-args";
 import { help, modelCallback } from "./utils.ts";
+
+// caching doesn't seem to work unless the folder exists
+await Deno.mkdir(env.cacheDir, { recursive: true })
 
 /**
  * Parse the command line arguments
