@@ -28,13 +28,13 @@ export function modelCallback(
     );
   }
   if (data.status === "progress") {
-    console.log(
+    Deno.stdout.write(new TextEncoder().encode(
       gray(
         `Downloading ${bold(white(data.name))} from ${
           bold(white(data.file))
-        }: ${data.progress}%`,
+        }: ${data.progress}%\r`,
       ),
-    );
+    ));
   }
   if (data.status === "done") {
     console.log(
